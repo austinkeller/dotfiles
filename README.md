@@ -19,3 +19,18 @@ The .ssh/rc and .ssh/config files are needed for tmux to work properly with ssh-
 ### Files
 
 .gitconfig
+
+# Archive dotfiles
+
+These are for tools that I don't typically use, but can be helpful when my tools of choice aren't available for a system.
+
+## screen
+
+### Files
+
+* .screenrc
+
+### Usage
+
+This is a windowing tool like tmux that is usually installed by default on linux systems.
+
