@@ -1,5 +1,7 @@
 [user]
-	email = austin474@gmail.com
+	email = austin.keller.ic@smartsheet.com
 	name = Austin Keller
 [push]
-	default = simple
+	default = current
+[core]
+	autocrlf = false
