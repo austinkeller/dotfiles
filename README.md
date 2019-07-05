@@ -14,6 +14,12 @@ Read .tmux.conf instructions for installing the tmux plugin manager (tpm) before
 
 The .ssh/rc and .ssh/config files are needed for tmux to work properly with ssh-agent forwarding when reattaching tmux after reconnecting an ssh session.
 
+## zsh
+
+### Files
+
+* .zshrc
+
 ## vim
 
 ### Files
