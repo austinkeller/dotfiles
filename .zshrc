@@ -89,6 +89,7 @@ function aws-env {
 
 	export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile $PROFILE)
 	export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile $PROFILE)
+	export AWS_DEFAULT_REGION=$(aws configure get region --profile $PROFILE)
 }
 
 alias ls='ls --color -N'
