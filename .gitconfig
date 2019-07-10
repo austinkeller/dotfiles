@@ -5,3 +5,12 @@
 	default = current
 [core]
 	autocrlf = false
+	pager = /usr/share/git/diff-highlight/diff-highlight | less
+[color]
+	ui = always
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
