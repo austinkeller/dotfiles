@@ -95,6 +95,15 @@ function aws-env {
 alias ls='ls --color -N'
 alias ll='ls -lah --color=auto'
 
+function is_bin_in_path {
+  builtin whence -p "$1" &> /dev/null
+}
+
+# Add diff-highlight to path and verify
+export PATH=$PATH:/usr/share/git/diff-highlight
+is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
+
+
 ############################################################################
 # Smartsheet-specific configuration
 ############################################################################
