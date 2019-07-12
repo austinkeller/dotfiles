@@ -4,9 +4,9 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=1000000
+HISTFILE=~/.zsh_history
+HISTSIZE=1000000000
+SAVEHIST=$HISTSIZE
 setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
 bindkey -v
