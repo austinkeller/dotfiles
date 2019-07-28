@@ -107,5 +107,5 @@ is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc
 ############################################################################
 # Smartsheet-specific configuration
 ############################################################################
-[[ -f ~/.zshrc_smartsheet ]] && . ~/.zshrc_smartsheet
+[[ -f ~/.zshrc_smartsheet ]] && . ~/.zshrc_smartsheet || true
 
