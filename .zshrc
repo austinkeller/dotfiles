@@ -18,6 +18,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+bindkey '^R' history-incremental-search-backward
+
 ###########################################################
 # From https://wiki.archlinux.org/index.php/Zsh#Key_bindings
 ############################################################
