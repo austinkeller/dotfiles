@@ -105,9 +105,10 @@ function is_bin_in_path {
 export PATH=$PATH:/usr/share/git/diff-highlight
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+source ~/.p10k.zsh
 
 ############################################################################
 # Smartsheet-specific configuration
 ############################################################################
 [[ -f ~/.zshrc_smartsheet ]] && . ~/.zshrc_smartsheet || true
-
