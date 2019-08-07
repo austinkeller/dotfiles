@@ -108,6 +108,9 @@ is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh
 
+# Add local bin
+export PATH=$PATH:$HOME/.local/bin
+
 ############################################################################
 # Smartsheet-specific configuration
 ############################################################################
