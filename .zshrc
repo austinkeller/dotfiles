@@ -123,6 +123,10 @@ function rl() {
         | perl -e 'my $c_to_sev = {0 => "48;5;9", 1 => "48;5;5", 2 => "38;5;9", 3 => "38;5;1", 4 => "38;5;5", 5 => "38;5;2", 6 => "38;5;2"}; while (<>) { s#^(([0-6])(?: [^ ]+){5})(.*)#\e[$c_to_sev->{$2}m$1\e[m$3#; print; }'
 }
 
+# Docker commands
+alias dcl='docker-compose logs -f --tail=1 &'
+alias dup='docker-compose up -d && dcl'
+
 function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
