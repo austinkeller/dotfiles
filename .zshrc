@@ -145,6 +145,9 @@ export PATH=$PATH:$HOME/.local/bin
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+# Make poetry work with asdf install
+alias poetry='python -m poetry'
+
 ############################################################################
 # Add custom zsh configurations that only apply to this system
 ############################################################################
