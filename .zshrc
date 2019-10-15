@@ -141,14 +141,9 @@ source ~/.p10k.zsh
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
-# setting for pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-  export PYENV_ROOT="${HOME}/.pyenv"
-  export PATH=${PYENV_ROOT}/bin:${PYENV_ROOT}/shims:${PATH}
-  eval "$(pyenv init -)"
-fi
-# setting for pyenv-virtualenv
-if command -v pyenv-virtualenv-init 1> /dev/null 2>&1; then eval "$(pyenv virtualenv-init -)"; fi
+# Setting for [asdf-vm](https://github.com/asdf-vm/asdf)
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 ############################################################################
 # Add custom zsh configurations that only apply to this system
