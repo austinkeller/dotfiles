@@ -127,6 +127,26 @@ function rl() {
 alias dcl='docker-compose logs -f --tail=1 &'
 alias dup='docker-compose up -d && dcl'
 
+# Git commands
+alias g='git'
+alias ga='git add'
+alias gb='git branch -va'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gcam='git commit -a -m'
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gd='git diff'
+alias gdh='git diff HEAD'
+alias gds='git diff --staged'
+alias gl='git pull'
+alias glt='git ls-tree --full-tree -r HEAD'
+alias gp='git push'
+alias gpu='branch=$(git branch | grep "\*" | awk "{ print \$2 }"); git push --set-upstream origin $branch'
+alias gr='git remote -v'
+alias gst='git status'
+
+# Useful test for breaking dependencies
 function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
