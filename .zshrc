@@ -202,6 +202,15 @@ else
   echo "To install, see https://asdf-vm.com/#/core-manage-asdf-vm?id=install-asdf-vm"
 fi
 
+# Data analysis tools
+alias rstudio='docker run \
+  --rm \
+  -d \
+  -e PASSWORD=donthackmebro \
+  -v $(pwd):/home/rstudio/work \
+  -p 8787:8787 \
+  rocker/verse:3.6.1'
+
 ############################################################################
 # Add custom zsh configurations that only apply to this system
 ############################################################################
