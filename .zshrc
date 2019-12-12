@@ -151,6 +151,31 @@ function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
 
+############################################################################
+# pacman wrappers
+############################################################################
+if is_bin_in_path powerpill
+then
+  # Speed up yay with concurrent downloads using powerpill
+  alias yay='yay --pacman powerpill'
+
+  # Add alias `pac` for running pacmatic wrapping yay wrapping powerpill
+  # See https://unix.stackexchange.com/questions/384101/have-pacmatic-wrap-yay-wrap-powerpill-wrap-pacman
+  if is_bin_in_path pacmatic
+  then
+    # pacmatic needs to be run as root: https://github.com/keenerd/pacmatic/issues/35
+    alias pacmatic='sudo --preserve-env=pacman_program /usr/bin/pacmatic'
+
+    # Downgrade permissions as AUR helpers expect to be run as a non-root user. $UID is read-only in {ba,z}sh.
+    alias pac='pacman_program="sudo -u #$UID /usr/bin/yay --pacman powerpill" pacmatic'
+  else
+    echo "Install pacmatic. See ~/.zshrc for more detail."
+  fi
+else
+  echo "Install powerpill. See ~/.zshrc for more detail."
+fi
+############################################################################
+
 # Add diff-highlight to path and verify
 export PATH=$PATH:/usr/share/git/diff-highlight
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
