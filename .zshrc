@@ -186,12 +186,21 @@ source ~/.p10k.zsh
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
-# Setting for [asdf-vm](https://github.com/asdf-vm/asdf)
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+function source_asdf {
+  # Setting for [asdf-vm](https://github.com/asdf-vm/asdf)
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
+}
 
-# Make poetry work with asdf install
-alias poetry='python -m poetry'
+if source_asdf
+then
+  # Make poetry work with asdf install
+  alias poetry='python -m poetry'
+else
+  echo "Missing asdf"
+  echo "See ~/.zshrc"
+  echo "To install, see https://asdf-vm.com/#/core-manage-asdf-vm?id=install-asdf-vm"
+fi
 
 ############################################################################
 # Add custom zsh configurations that only apply to this system
