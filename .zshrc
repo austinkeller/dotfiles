@@ -186,20 +186,9 @@ source ~/.p10k.zsh
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
-function source_asdf {
-  # Setting for [asdf-vm](https://github.com/asdf-vm/asdf)
-  . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
-}
-
-if source_asdf
+if command -v pyenv 1>/dev/null 2>&1
 then
-  # Make poetry work with asdf install
-  alias poetry='python -m poetry'
-else
-  echo "Missing asdf"
-  echo "See ~/.zshrc"
-  echo "To install, see https://asdf-vm.com/#/core-manage-asdf-vm?id=install-asdf-vm"
+  eval "$(pyenv init -)"
 fi
 
 # Data analysis tools
