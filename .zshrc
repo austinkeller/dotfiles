@@ -210,6 +210,16 @@ alias rstudio='docker run \
   -p 8787:8787 \
   rocker/verse:3.6.1'
 
+alias ml-workspace='docker run \
+  -d \
+  --name "ml-workspace" \
+  -v "${PWD}:/workspace" \
+  -e AUTHENTICATE_VIA_JUPYTER="donthackmebro" \
+  --shm-size 512m \
+  --restart always \
+  -p 8788:8080 \
+  mltooling/ml-workspace:0.8.7'
+
 ############################################################################
 # Add custom zsh configurations that only apply to this system
 ############################################################################
