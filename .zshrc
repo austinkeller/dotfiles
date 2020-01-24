@@ -191,6 +191,11 @@ then
   eval "$(pyenv init -)"
 fi
 
+# GO
+export GOPATH=$HOME/go
+# Add all $GOPATH/bin directories to path
+export PATH="$PATH:${GOPATH//://bin:}/bin"
+
 # Initializes directory with a new python virtualenv that is automatically
 # loaded within the dir
 function python-direnv-init {
