@@ -157,7 +157,13 @@ function is_bin_in_path {
 if is_bin_in_path powerpill
 then
   # Speed up yay with concurrent downloads using powerpill
-  alias yay='yay --pacman powerpill'
+  function yay() {
+    if [ $(which python) = "/usr/bin/python" ] || [ $(pyenv which python) = "/usr/bin/python" ]; then
+      command yay --pacman powerpill "$@"
+    else
+      echo "You must be using system python in order to run yay. See ~/.zshrc"
+    fi
+  }
 
   # Add alias `pac` for running pacmatic wrapping yay wrapping powerpill
   # See https://unix.stackexchange.com/questions/384101/have-pacmatic-wrap-yay-wrap-powerpill-wrap-pacman
