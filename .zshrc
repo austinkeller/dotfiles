@@ -155,6 +155,11 @@ alias gpu='branch=$(git branch | grep "\*" | awk "{ print \$2 }"); git push --se
 alias gr='git remote -v'
 alias gst='git status'
 
+# Todoist completions
+if [[ -r /usr/share/todoist/todoist_functions.sh ]]; then
+    source /usr/share/todoist/todoist_functions.sh
+fi
+
 # Useful test for breaking dependencies
 function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
