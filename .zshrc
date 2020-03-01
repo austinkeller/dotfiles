@@ -127,6 +127,15 @@ function rl() {
 alias dcl='docker-compose logs -f --tail=1 &'
 alias dup='docker-compose up -d && dcl'
 
+# Fzf commands
+if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+    source /usr/share/fzf/key-bindings.zsh
+fi
+
+if [[ -r /usr/share/fzf/completion.zsh ]]; then
+    source /usr/share/fzf/completion.zsh
+fi
+
 # Git commands
 alias g='git'
 alias ga='git add'
