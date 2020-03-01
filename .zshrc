@@ -71,6 +71,9 @@ fi
 # End key bindings fix
 ######################
 
+# Add local bin
+export PATH=$PATH:$HOME/.local/bin
+
 function aws-env {
 	##########################################################################
 	# Convenience function for setting aws environment variables from
@@ -123,11 +126,15 @@ function rl() {
         | perl -e 'my $c_to_sev = {0 => "48;5;9", 1 => "48;5;5", 2 => "38;5;9", 3 => "38;5;1", 4 => "38;5;5", 5 => "38;5;2", 6 => "38;5;2"}; while (<>) { s#^(([0-6])(?: [^ ]+){5})(.*)#\e[$c_to_sev->{$2}m$1\e[m$3#; print; }'
 }
 
-# Docker commands
+#
+# Docker
+#
 alias dcl='docker-compose logs -f --tail=1 &'
 alias dup='docker-compose up -d && dcl'
 
-# Fzf commands
+#
+# Fzf
+#
 if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
     source /usr/share/fzf/key-bindings.zsh
 fi
@@ -136,7 +143,9 @@ if [[ -r /usr/share/fzf/completion.zsh ]]; then
     source /usr/share/fzf/completion.zsh
 fi
 
-# Git commands
+#
+# Git
+#
 alias g='git'
 alias ga='git add'
 alias gb='git branch -va'
@@ -155,19 +164,33 @@ alias gpu='branch=$(git branch | grep "\*" | awk "{ print \$2 }"); git push --se
 alias gr='git remote -v'
 alias gst='git status'
 
-# Todoist completions
+#
+# Go
+#
+export GOPATH=$HOME/go
+# Add all $GOPATH/bin directories to path
+export PATH="$PATH:${GOPATH//://bin:}/bin"
+
+#
+# Todoist
+#
+# Add completions for fzf
 if [[ -r /usr/share/todoist/todoist_functions.sh ]]; then
     source /usr/share/todoist/todoist_functions.sh
 fi
+
+############################################################################
+# Misc
+############################################################################
 
 # Useful test for breaking dependencies
 function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
 
-############################################################################
+#
 # pacman wrappers
-############################################################################
+#
 if is_bin_in_path powerpill
 then
   # Speed up yay with concurrent downloads using powerpill
@@ -194,28 +217,31 @@ then
 else
   echo "Install powerpill. See ~/.zshrc for more detail."
 fi
-############################################################################
 
+#
+# diff-highlight
+#
 # Add diff-highlight to path and verify
 export PATH=$PATH:/usr/share/git/diff-highlight
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
+#
+# Powerlevel10k
+#
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 source ~/.p10k.zsh
 
-# Add local bin
-export PATH=$PATH:$HOME/.local/bin
-
+#
+# pyenv
+#
 if command -v pyenv 1>/dev/null 2>&1
 then
   eval "$(pyenv init -)"
 fi
 
-# GO
-export GOPATH=$HOME/go
-# Add all $GOPATH/bin directories to path
-export PATH="$PATH:${GOPATH//://bin:}/bin"
-
+#
+# python-direnv-init
+#
 # Initializes directory with a new python virtualenv that is automatically
 # loaded within the dir
 function python-direnv-init {
@@ -226,7 +252,9 @@ python3 -m venv $VIRTUAL_ENV
 EOF
 }
 
+#
 # Data analysis tools
+#
 alias rstudio='docker run \
   --rm \
   -d \
