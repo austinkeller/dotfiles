@@ -150,6 +150,10 @@ fi
 #
 # Git
 #
+
+# Fix so that zsh extendedglob doesn't interfere when using characters like ^
+alias git='noglob git'
+
 alias g='git'
 alias ga='git add'
 alias gb='git branch -va'
