@@ -11,6 +11,10 @@ setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
+
+# For Python Poetry completions
+fpath+=~/.zfunc
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/akeller/.zshrc'
 
