@@ -183,8 +183,8 @@ export PATH="$PATH:${GOPATH//://bin:}/bin"
 # Todoist
 #
 # Add completions for fzf
-if [[ -r /usr/share/todoist/todoist_functions.sh ]]; then
-    source /usr/share/todoist/todoist_functions.sh
+if [[ -r /usr/share/todoist/todoist_functions_fzf.sh ]]; then
+    source /usr/share/todoist/todoist_functions_fzf.sh
 fi
 
 ############################################################################
