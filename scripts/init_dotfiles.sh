@@ -8,7 +8,7 @@ ln -s .dotfiles/.vimrc
 ln -s .dotfiles/.zshrc
 ln -s .dotfiles/.p10k.zsh
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-git clone --recursive git@github.com:austinkeller/prezto "${ZDOTDIR:-$HOME}"/.zprezto
+git clone --recursive https://github.com/austinkeller/prezto.git "${ZDOTDIR:-$HOME}"/.zprezto
 cd "${ZDOTDIR:-$HOME}"/.zprezto
 git remote add upstream https://github.com/sorin-ionescu/prezto.git
 cd $HOME
