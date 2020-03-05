@@ -14,6 +14,7 @@ git remote add upstream https://github.com/sorin-ionescu/prezto.git
 cd $HOME
 
 setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc)(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc)(N); do
+  echo "$rcfile"
+  ln -snv "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
