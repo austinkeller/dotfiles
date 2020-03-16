@@ -197,6 +197,13 @@ function is_bin_in_path {
 }
 
 #
+# tmux
+#
+tmux-fixssh() {
+  eval $(tmux show-env -s |grep '^SSH_')
+}
+
+#
 # pacman wrappers
 #
 if is_bin_in_path powerpill
