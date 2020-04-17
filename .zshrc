@@ -204,6 +204,11 @@ tmux-fixssh() {
 }
 
 #
+# node.js
+#
+source /usr/share/nvm/init-nvm.sh
+
+#
 # pacman wrappers
 #
 if is_bin_in_path powerpill
