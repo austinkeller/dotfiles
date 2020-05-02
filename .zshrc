@@ -283,15 +283,34 @@ alias rstudio='docker run \
   -p 8787:8787 \
   rocker/verse:3.6.1'
 
-alias ml-workspace='docker run \
-  -d \
-  --name "ml-workspace" \
-  -v "${PWD}:/workspace" \
-  -e AUTHENTICATE_VIA_JUPYTER="donthackmebro" \
-  --shm-size 512m \
-  --restart always \
-  -p 8788:8080 \
-  mltooling/ml-workspace:0.8.7'
+function jupyter () {
+  docker run -it --rm \
+    -p ${JUPYTER_PORT:=8888}:8888 \
+    -e JUPYTER_ENABLE_LAB=${JUPYTER_ENABLE_LAB:=yes} \
+    -v "${SSH_AUTH_SOCK}":/ssh-agent \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+     -v "${PWD}:/home/jovyan/work" \
+    -w "/home/jovyan/work" \
+    --shm-size 512m \
+    jupyter/scipy-notebook:latest "$@"
+}
+function ml-workspace () {
+  __PORT=${ML_WORKSPACE_PORT:=8788}
+  docker run \
+    -d \
+    --name "ml-workspace" \
+    -v "${SSH_AUTH_SOCK}":/ssh-agent \
+    -e SSH_AUTH_SOCK=/ssh-agent \
+    -v "${PWD}:/workspace" \
+    -e AUTHENTICATE_VIA_JUPYTER="donthackmebro" \
+    --shm-size 512m \
+    --restart always \
+    -p ${__PORT}:8080 \
+    mltooling/ml-workspace:0.8.7
+
+  echo "starting ml-workspace at http://127.0.0.1:${__PORT}"
+  xdg-open http://127.0.0.1:${__PORT}
+}
 
 ############################################################################
 # Add custom zsh configurations that only apply to this system
