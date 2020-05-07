@@ -78,6 +78,14 @@ fi
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
+#
+# Add Android tools
+#
+export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
+
+#
+# AWS tools
+#
 function aws-env {
 	##########################################################################
 	# Convenience function for setting aws environment variables from
@@ -110,6 +118,10 @@ function aws-unset {
         unset AWS_DEFAULT_PROFILE
 }
 
+#
+# System aliases and helpers
+#
+
 alias ls='ls --color -N'
 alias ll='ls -lah --color=auto'
 
@@ -135,6 +147,23 @@ function rl() {
 #
 alias dcl='docker-compose logs -f --tail=1 &'
 alias dup='docker-compose up -d && dcl'
+
+#
+# direnv
+#
+_direnv_hook() {
+  trap -- '' SIGINT;
+  eval "$("/usr/bin/direnv" export zsh)";
+  trap - SIGINT;
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+fi
+typeset -ag chpwd_functions;
+if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
+  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+fi
 
 #
 # Fzf
