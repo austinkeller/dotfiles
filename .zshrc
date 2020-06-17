@@ -99,6 +99,10 @@ function save_function {
   eval "$NEWNAME_FUNC"
 }
 
+# Fix for OpenCV verbose logging with howdy package
+# See https://wiki.archlinux.org/index.php/Howdy#GStreamer_warnings_in_shell
+export OPENCV_LOG_LEVEL=ERROR
+
 #
 # Add Android tools
 #
