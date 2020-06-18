@@ -58,3 +58,5 @@
   diff-since-merge = "!git diff $(git merge-base develop HEAD)"
 [commit]
 	gpgsign = true
+[pull]
+	ff = only
