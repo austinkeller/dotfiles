@@ -320,16 +320,42 @@ alias rstudio='docker run \
   rocker/verse:3.6.1'
 
 function jupyter () {
-  docker run -it --rm \
-    -p ${JUPYTER_PORT:=8888}:8888 \
+  docker build -t jupyter-akeller-zshrc:1.0.0 -<<'EOF'
+FROM jupyter/scipy-notebook:latest
+USER root
+
+RUN apt-get update \
+      && apt-get install -y \
+      ssh \
+      curl \
+      && apt-get clean \
+      && rm -rf /var/lib/apt/lists/*
+
+RUN fix-permissions $CONDA_DIR && \
+          fix-permissions /home/$NB_USER
+
+USER $NB_UID
+EOF
+
+  __PORT=${JUPYTER_PORT:=8888}
+
+  docker run -it -d --rm \
+    --name jupyter_zshrc_${__PORT} \
+    -p ${__PORT}:8888 \
     -e JUPYTER_ENABLE_LAB=${JUPYTER_ENABLE_LAB:=yes} \
     -v "${SSH_AUTH_SOCK}":/ssh-agent \
     -e SSH_AUTH_SOCK=/ssh-agent \
      -v "${PWD}:/home/jovyan/work" \
     -w "/home/jovyan/work" \
     --shm-size 512m \
-    jupyter/scipy-notebook:latest "$@"
+    jupyter-akeller-zshrc:1.0.0 "$@"
 }
+
+function jupyter-url () {
+  __PORT=${JUPYTER_PORT:=8888}
+  docker logs jupyter_zshrc_${__PORT} | command grep -m1 -o 'http://127.0.0.1:[0-9]*/?token=[0-9a-z]*'
+}
+
 function ml-workspace () {
   __PORT=${ML_WORKSPACE_PORT:=8788}
   docker run \
