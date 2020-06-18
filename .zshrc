@@ -223,6 +223,11 @@ if [[ -r /usr/share/todoist/todoist_functions_fzf.sh ]]; then
     source /usr/share/todoist/todoist_functions_fzf.sh
 fi
 
+function todoist-review() {
+  curl https://gist.githubusercontent.com/austinkeller/7dfa4c39832c32c2246fbd32a2b9ef0b/raw/e851ae0a6172527f7cf5db59b18c17ecd4cae999/todoist_completed_tasks.sh | \
+    sh -s $@
+}
+
 ############################################################################
 # Misc
 ############################################################################
