@@ -309,6 +309,14 @@ EOF
 }
 
 #
+# Data engineering
+#
+
+function dbt {
+  docker run -it --rm -v $PWD:/usr/app fishtownanalytics/dbt:0.16.1 dbt "$@"
+}
+
+#
 # Data analysis tools
 #
 alias rstudio='docker run \
