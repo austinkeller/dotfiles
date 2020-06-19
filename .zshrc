@@ -287,12 +287,6 @@ export PATH=$PATH:/usr/share/git/diff-highlight
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
-# Powerlevel10k
-#
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-source ~/.p10k.zsh
-
-#
 # pyenv
 #
 if command -v pyenv 1>/dev/null 2>&1
@@ -396,3 +390,6 @@ function ml-workspace () {
 # Smartsheet-specific configuration
 ############################################################################
 [[ -f ~/.zshrc_smartsheet ]] && . ~/.zshrc_smartsheet || true
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
+[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
