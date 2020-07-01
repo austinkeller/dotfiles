@@ -19,6 +19,13 @@ The .ssh/rc and .ssh/config files are needed for tmux to work properly with ssh-
 ### Files
 
 * .zshrc
+* .p10k.zsh
+
+### Usage
+
+powelevel10k assumes that you have the [recommended fonts](https://github.com/romkatv/powerlevel10k#recommended-meslo-nerd-font-patched-for-powerlevel10k) installed.
+
+  * Arch: [ttf-meslo-nerd-font-powerlevel10k](https://aur.archlinux.org/packages/ttf-meslo-nerd-font-powerlevel10k/).
 
 ## vim
 
