@@ -247,36 +247,46 @@ tmux-fixssh() {
 #
 # node.js
 #
-source /usr/share/nvm/init-nvm.sh
+if [[ -r /usr/share/nvm/init-nvm.sh ]]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
 
-#
-# pacman wrappers
-#
-if is_bin_in_path powerpill
+# Tests for distro-specific tools (e.g. package managers)
+function is_arch {
+  [ -f "/etc/arch-release" ]
+}
+
+if is_arch
 then
-  # Speed up yay with concurrent downloads using powerpill
-  function yay() {
-    if [ $(which python) = "/usr/bin/python" ] || [ $(pyenv which python) = "/usr/bin/python" ]; then
-      command yay --pacman powerpill "$@"
-    else
-      echo "You must be using system python in order to run yay. See ~/.zshrc"
-    fi
-  }
-
-  # Add alias `pac` for running pacmatic wrapping yay wrapping powerpill
-  # See https://unix.stackexchange.com/questions/384101/have-pacmatic-wrap-yay-wrap-powerpill-wrap-pacman
-  if is_bin_in_path pacmatic
+  #
+  # pacman wrappers
+  #
+  if is_bin_in_path powerpill
   then
-    # pacmatic needs to be run as root: https://github.com/keenerd/pacmatic/issues/35
-    alias pacmatic='sudo --preserve-env=pacman_program /usr/bin/pacmatic'
+    # Speed up yay with concurrent downloads using powerpill
+    function yay() {
+      if [ $(which python) = "/usr/bin/python" ] || [ $(pyenv which python) = "/usr/bin/python" ]; then
+	command yay --pacman powerpill "$@"
+      else
+	echo "You must be using system python in order to run yay. See ~/.zshrc"
+      fi
+    }
 
-    # Downgrade permissions as AUR helpers expect to be run as a non-root user. $UID is read-only in {ba,z}sh.
-    alias pac='pacman_program="sudo -u #$UID /usr/bin/yay --pacman powerpill" pacmatic'
+    # Add alias `pac` for running pacmatic wrapping yay wrapping powerpill
+    # See https://unix.stackexchange.com/questions/384101/have-pacmatic-wrap-yay-wrap-powerpill-wrap-pacman
+    if is_bin_in_path pacmatic
+    then
+      # pacmatic needs to be run as root: https://github.com/keenerd/pacmatic/issues/35
+      alias pacmatic='sudo --preserve-env=pacman_program /usr/bin/pacmatic'
+
+      # Downgrade permissions as AUR helpers expect to be run as a non-root user. $UID is read-only in {ba,z}sh.
+      alias pac='pacman_program="sudo -u #$UID /usr/bin/yay --pacman powerpill" pacmatic'
+    else
+      echo "Install pacmatic. See ~/.zshrc for more detail."
+    fi
   else
-    echo "Install pacmatic. See ~/.zshrc for more detail."
+    echo "Install powerpill. See ~/.zshrc for more detail."
   fi
-else
-  echo "Install powerpill. See ~/.zshrc for more detail."
 fi
 
 #
