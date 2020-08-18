@@ -297,6 +297,39 @@ export PATH=$PATH:/usr/share/git/diff-highlight
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
+# Gnome
+#
+# Allow setting up a simple notification server locally that can be reached by
+# my remotes over ssh
+function start-notify-server {
+  nohup ncat -klc "/usr/bin/notify-send remote-notify foobar && paplay /usr/share/sounds/freedesktop/stereo/complete.oga" localhost ${NOTIFY_ME_PORT:=10009} > /dev/null 2>&1 &; disown
+}
+
+function stop-notify-server {
+  pkill ncat
+}
+
+function start-notify-tunnel {
+  local USAGE="$0 <ssh-remote> [remote-port]\nFor example: $0 desky, or $0 desky 10008"
+
+  if [ -z "$1" ]; then
+    echo $USAGE
+  return 1
+  elif [[ $* == *-h* ]]; then
+    echo $USAGE
+    return 0
+  else
+    local REMOTE_HOST=$1
+  fi
+
+  ssh -N -R ${2:=10008}:localhost:${NOTIFY_ME_PORT:=10009} $REMOTE_HOST
+}
+
+function notify-me {
+  ncat --idle-timeout 1s localhost ${1:=10008}
+}
+
+#
 # pyenv
 #
 if command -v pyenv 1>/dev/null 2>&1
