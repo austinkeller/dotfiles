@@ -326,7 +326,8 @@ function start-notify-tunnel {
 }
 
 function notify-me {
-  ncat --idle-timeout 1s localhost ${1:=10008}
+  # ignore error code
+  ncat --idle-timeout 1s localhost ${1:=10008} || true
 }
 
 #
