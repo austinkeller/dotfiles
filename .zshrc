@@ -302,7 +302,7 @@ is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc
 # Allow setting up a simple notification server locally that can be reached by
 # my remotes over ssh
 function start-notify-server {
-  nohup ncat -klc "/usr/bin/notify-send remote-notify foobar && paplay /usr/share/sounds/freedesktop/stereo/complete.oga" localhost ${NOTIFY_ME_PORT:=10009} > /dev/null 2>&1 &; disown
+  nohup ncat -klc "/usr/bin/notify-send remote-notify foobar && paplay --volume $((2**16 * 50/100)) /usr/share/sounds/freedesktop/stereo/complete.oga" localhost ${NOTIFY_ME_PORT:=10009} > /dev/null 2>&1 &; disown
 }
 
 function stop-notify-server {
