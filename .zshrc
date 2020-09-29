@@ -125,6 +125,9 @@ function aws-unset {
         unset AWS_DEFAULT_PROFILE
 }
 
+# Enable shell autocompletion for eksctl
+source <(eksctl completion zsh)
+
 #
 # System aliases and helpers
 #
@@ -217,6 +220,11 @@ alias gst='git status'
 export GOPATH=$HOME/go
 # Add all $GOPATH/bin directories to path
 export PATH="$PATH:${GOPATH//://bin:}/bin"
+
+#
+# Kubernetes
+#
+alias k='kubectl'
 
 #
 # Todoist
