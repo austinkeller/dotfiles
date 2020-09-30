@@ -85,6 +85,11 @@ fi
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
+# Useful test for breaking dependencies
+function is_bin_in_path {
+  builtin whence -p "$1" &> /dev/null
+}
+
 #
 # Add Android tools
 #
@@ -126,7 +131,11 @@ function aws-unset {
 }
 
 # Enable shell autocompletion for eksctl
-source <(eksctl completion zsh)
+if is_bin_in_path eksctl; then
+    source <(eksctl completion zsh)
+fi
+
+
 
 #
 # System aliases and helpers
@@ -242,11 +251,6 @@ function todoist-review() {
 ############################################################################
 # Misc
 ############################################################################
-
-# Useful test for breaking dependencies
-function is_bin_in_path {
-  builtin whence -p "$1" &> /dev/null
-}
 
 #
 # tmux
