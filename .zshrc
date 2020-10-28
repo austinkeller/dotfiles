@@ -93,6 +93,11 @@ function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
 
+# Tests for distro-specific tools (e.g. package managers)
+function is_arch {
+  [ -f "/etc/arch-release" ]
+}
+
 #
 # Add Android tools
 #
@@ -193,12 +198,23 @@ fi
 #
 # Fzf
 #
-if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
+if is_arch
+then
+  if [[ -r /usr/share/fzf/key-bindings.zsh ]]; then
     source /usr/share/fzf/key-bindings.zsh
-fi
+  fi
 
-if [[ -r /usr/share/fzf/completion.zsh ]]; then
+  if [[ -r /usr/share/fzf/completion.zsh ]]; then
     source /usr/share/fzf/completion.zsh
+  fi
+else
+  if [[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
+    source /usr/share/doc/fzf/examples/key-bindings.zsh
+  fi
+
+  if [[ -r /usr/share/doc/fzf/examples/completion.zsh ]]; then
+    source /usr/share/doc/fzf/examples/completion.zsh
+  fi
 fi
 
 #
@@ -268,11 +284,6 @@ tmux-fixssh() {
 if [[ -r /usr/share/nvm/init-nvm.sh ]]; then
   source /usr/share/nvm/init-nvm.sh
 fi
-
-# Tests for distro-specific tools (e.g. package managers)
-function is_arch {
-  [ -f "/etc/arch-release" ]
-}
 
 if is_arch
 then
