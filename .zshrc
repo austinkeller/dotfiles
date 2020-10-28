@@ -85,6 +85,9 @@ fi
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 
+# Add snap bin
+export PATH=$PATH:/snap/bin
+
 # Useful test for breaking dependencies
 function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
@@ -308,7 +311,12 @@ fi
 # diff-highlight
 #
 # Add diff-highlight to path and verify
-export PATH=$PATH:/usr/share/git/diff-highlight
+if is_arch
+then
+  export PATH=$PATH:/usr/share/git/diff-highlight
+else
+  export PATH=$PATH:/usr/share/doc/git/contrib/diff-highlight
+fi
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
