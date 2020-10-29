@@ -18,3 +18,9 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc)(N); do
   echo "$rcfile"
   ln -snv "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
+
+mkdir -p $HOME/.local/bin
+
+ln -sf $HOME/.dotfiles/scripts/start-ec2.sh $HOME/.local/bin/start-ec2
+ln -sf $HOME/.dotfiles/scripts/stop-ec2.sh $HOME/.local/bin/stop-ec2
+ln -sf $HOME/.dotfiles/scripts/switch-ec2.sh $HOME/.local/bin/switch-ec2
