@@ -438,7 +438,9 @@ EOF
 
 function jupyter-url () {
   __PORT=${JUPYTER_PORT:=8888}
-  docker logs jupyter_zshrc_${__PORT} | command grep -m1 -o 'http://127.0.0.1:[0-9]*/?token=[0-9a-z]*'
+  docker logs jupyter_zshrc_${__PORT} | \
+    command grep -m1 -o 'http://127.0.0.1:[0-9]*/?token=[0-9a-z]*' | \
+    sed "s/127.0.0.1:[0-9]*/127.0.0.1:${__PORT}/"
 }
 
 function ml-workspace () {
