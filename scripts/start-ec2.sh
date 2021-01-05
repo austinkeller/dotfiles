@@ -18,13 +18,19 @@ fi
 
 INSTANCE_ID=$(aws ec2 describe-instances --filter "Name=tag:Name,Values=${INSTANCE_NAME}" --query "Reservations[].Instances[].InstanceId[]" --output text)
 
-aws ec2 start-instances --instance-id $INSTANCE_ID
+INSTANCE_STATE=$(aws ec2 describe-instances --instance-id $INSTANCE_ID --query "Reservations[].Instances[].State[].Name" | jq '.[]')
 
-while [ '"running"' != $(aws ec2 describe-instances --instance-id $INSTANCE_ID --query "Reservations[].Instances[].State[].Name" | jq '.[]') ]
-do
-  sleep 1
-done
+if [ "$INSTANCE_STATE" == '"running"' ]; then
+  echo "$INSTANCE_NAME is already running"
+else
+  aws ec2 start-instances --instance-id $INSTANCE_ID
 
-notify-send -i terminal "Started $INSTANCE_NAME"
+  while [ '"running"' != $(aws ec2 describe-instances --instance-id $INSTANCE_ID --query "Reservations[].Instances[].State[].Name" | jq '.[]') ]
+  do
+    sleep 1
+  done
+
+  notify-send -i terminal "Started $INSTANCE_NAME"
+fi
 
 ssh -o "StrictHostKeyChecking=no" ec2-${INSTANCE_NAME}
