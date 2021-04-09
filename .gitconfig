@@ -5,7 +5,7 @@
 [push]
   default = current
 [core]
-  autocrlf = false
+  autocrlf = input
   pager = diff-highlight | less
 [color]
   ui = always
