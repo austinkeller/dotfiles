@@ -155,7 +155,7 @@ alias sudo='sudo -v; sudo '
 alias ls='ls --color -N'
 alias ll='ls -lah --color=auto'
 
-function rl() {
+function rl {
     ## rl: read log
     ## journalctl wrapper with nice output format and colors based on log event severity.
     ## The order is for human consumption only so they are just based on RFC 5424 (without being compliant) and the default journalctl short-iso format.
@@ -181,7 +181,7 @@ alias dup='docker-compose up -d && dcl'
 #
 # direnv
 #
-_direnv_hook() {
+function _direnv_hook() {
   trap -- '' SIGINT;
   eval "$("/usr/bin/direnv" export zsh)";
   trap - SIGINT;
@@ -262,7 +262,7 @@ if [[ -r /usr/share/todoist/todoist_functions_fzf.sh ]]; then
     source /usr/share/todoist/todoist_functions_fzf.sh
 fi
 
-function todoist-review() {
+function todoist-review {
   curl https://gist.githubusercontent.com/austinkeller/7dfa4c39832c32c2246fbd32a2b9ef0b/raw/e851ae0a6172527f7cf5db59b18c17ecd4cae999/todoist_completed_tasks.sh | \
     sh -s $@
 }
@@ -274,7 +274,7 @@ function todoist-review() {
 #
 # tmux
 #
-tmux-fixssh() {
+function tmux-fixssh {
   eval $(tmux show-env -s |grep '^SSH_')
 }
 
@@ -293,7 +293,7 @@ then
   if is_bin_in_path powerpill
   then
     # Speed up yay with concurrent downloads using powerpill
-    function yay() {
+    function yay {
       if [ $(which python) = "/usr/bin/python" ] || [ $(pyenv which python) = "/usr/bin/python" ]; then
 	command yay --pacman powerpill "$@"
       else
@@ -404,7 +404,7 @@ alias rstudio='docker run \
   -p 8787:8787 \
   rocker/verse:3.6.1'
 
-function jupyter () {
+function jupyter {
   docker build -t jupyter-akeller-zshrc:1.0.0 -<<'EOF'
 FROM jupyter/scipy-notebook:latest
 USER root
@@ -436,14 +436,14 @@ EOF
     jupyter-akeller-zshrc:1.0.0 "$@"
 }
 
-function jupyter-url () {
+function jupyter-url {
   __PORT=${JUPYTER_PORT:=8888}
   docker logs jupyter_zshrc_${__PORT} | \
     command grep -m1 -o 'http://127.0.0.1:[0-9]*/?token=[0-9a-z]*' | \
     sed "s/127.0.0.1:[0-9]*/127.0.0.1:${__PORT}/"
 }
 
-function ml-workspace () {
+function ml-workspace {
   __PORT=${ML_WORKSPACE_PORT:=8788}
   docker run \
     -d \
