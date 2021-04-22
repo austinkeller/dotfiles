@@ -272,6 +272,27 @@ function todoist-review {
 ############################################################################
 
 #
+# ssh
+#
+function make-ssh-key {
+  SCRIPT_NAME=$(basename $0)
+
+  USAGE="$SCRIPT_NAME <key_name>\nFor example: $SCRIPT_NAME github"
+
+  if [ -z "$1" ]; then
+    echo -e $USAGE
+    return 1
+  elif [[ $* == *-h* ]]; then
+    echo $USAGE
+    return 0
+  else
+    INSTANCE_NAME=$1
+  fi
+  _key_name="$1"
+  ssh-keygen -a 100 -o -t ed25519 -f ~/.ssh/id_ed25519_${_key_name} -C "${USER}@$(hostname) ${_key_name}"
+}
+
+#
 # tmux
 #
 function tmux-fixssh {
