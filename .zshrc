@@ -98,6 +98,15 @@ function is_arch {
   [ -f "/etc/arch-release" ]
 }
 
+# Allows for overriding shell functions
+function save_function() {
+  # Usage: save_function func new_func
+  # From https://mharrison.org/post/bashfunctionoverride/
+  local ORIG_FUNC=$(declare -f $1)
+  local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+  eval "$NEWNAME_FUNC"
+}
+
 #
 # Add Android tools
 #
