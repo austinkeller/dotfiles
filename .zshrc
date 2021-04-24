@@ -98,11 +98,15 @@ function is_arch {
   [ -f "/etc/arch-release" ]
 }
 
+function is_centos {
+  [ -f "/etc/centos-release" ]
+}
+
 # Allows for overriding shell functions
-function save_function() {
+function save_function {
   # Usage: save_function func new_func
   # From https://mharrison.org/post/bashfunctionoverride/
-  local ORIG_FUNC=$(declare -f $1)
+  local ORIG_FUNC="$(declare -f $1)"
   local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
   eval "$NEWNAME_FUNC"
 }
@@ -352,6 +356,9 @@ fi
 if is_arch
 then
   export PATH=$PATH:/usr/share/git/diff-highlight
+elif is_centos
+then
+  export PATH=$PATH:/usr/share/doc/git-1.8.3.1/contrib/diff-highlight
 else
   export PATH=$PATH:/usr/share/doc/git/contrib/diff-highlight
 fi
