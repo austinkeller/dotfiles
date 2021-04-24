@@ -158,9 +158,6 @@ fi
 # System aliases and helpers
 #
 
-# Refresh sudo timeout each time sudo is used
-alias sudo='sudo -v; sudo '
-
 alias ls='ls --color -N'
 alias ll='ls -lah --color=auto'
 
