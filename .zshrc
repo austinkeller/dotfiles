@@ -355,12 +355,17 @@ fi
 # Add diff-highlight to path and verify
 if is_arch
 then
-  export PATH=$PATH:/usr/share/git/diff-highlight
+  diff_highlight_path=/usr/share/git/diff-highlight
 elif is_centos
 then
-  export PATH=$PATH:/usr/share/doc/git-1.8.3.1/contrib/diff-highlight
+  diff_highlight_path=/usr/share/doc/git-1.8.3.1/contrib/diff-highlight
 else
-  export PATH=$PATH:/usr/share/doc/git/contrib/diff-highlight
+  diff_highlight_path=/usr/share/doc/git/contrib/diff-highlight
+fi
+export PATH=$PATH:$diff_highlight_path
+if [[ -f $diff_highlight_path/diff-highlight && ! -x $diff_highlight_path/diff-highlight ]]; then
+  echo "diff-highlight found but is not executable. Fix with the following command:"
+  echo "sudo chmod a+x $diff_highlight_path/diff-highlight"
 fi
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
