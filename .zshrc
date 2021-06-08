@@ -16,7 +16,7 @@ HISTSIZE=1000000000
 SAVEHIST=$HISTSIZE
 setopt appendhistory autocd extendedglob nomatch notify
 unsetopt beep
-bindkey -v
+bindkey -e
 # End of lines configured by zsh-newuser-install
 
 # For Python Poetry completions
