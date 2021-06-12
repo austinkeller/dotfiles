@@ -260,6 +260,11 @@ export GOPATH=$HOME/go
 export PATH="$PATH:${GOPATH//://bin:}/bin"
 
 #
+# Gpg
+#
+export GPG_TTY=$TTY
+
+#
 # Kubernetes
 #
 alias k='kubectl'
