@@ -191,18 +191,20 @@ alias dup='docker-compose up -d && dcl'
 #
 # direnv
 #
-function _direnv_hook() {
-  trap -- '' SIGINT;
-  eval "$("/usr/bin/direnv" export zsh)";
-  trap - SIGINT;
-}
-typeset -ag precmd_functions;
-if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
-  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
-fi
-typeset -ag chpwd_functions;
-if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
-  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+if is_bin_in_path direnv; then
+  function _direnv_hook() {
+    trap -- '' SIGINT;
+    eval "$("/usr/bin/direnv" export zsh)";
+    trap - SIGINT;
+  }
+  typeset -ag precmd_functions;
+  if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+    precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+  fi
+  typeset -ag chpwd_functions;
+  if [[ -z ${chpwd_functions[(r)_direnv_hook]} ]]; then
+    chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+  fi
 fi
 
 #
@@ -371,7 +373,6 @@ if [[ -f $diff_highlight_path/diff-highlight && ! -x $diff_highlight_path/diff-h
   echo "diff-highlight found but is not executable. Fix with the following command:"
   echo "sudo chmod a+x $diff_highlight_path/diff-highlight"
 fi
-is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
 # Gnome

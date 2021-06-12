@@ -6,7 +6,6 @@
   default = current
 [core]
   autocrlf = input
-  pager = diff-highlight | less
 [color]
   ui = always
 [color "diff-highlight"]
@@ -14,10 +13,6 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
-[pager]
-  log = diff-highlight | less
-  show = diff-highlight | less
-  diff = diff-highlight | less
 [alias]
   lg = !"git lg1-specific"
   lga = !"git lg1-specific --all"
