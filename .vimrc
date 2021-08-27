@@ -19,6 +19,9 @@ call plug#begin('~/.vim/plugged')
 " Gruvbox theme.
 Plug 'morhetz/gruvbox'
 
+" Fancy start screen
+Plug 'mhinz/vim-startify'
+
 " Integrate fzf with Vim.
 Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
