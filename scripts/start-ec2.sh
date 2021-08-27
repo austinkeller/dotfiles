@@ -2,6 +2,8 @@
 
 set -e
 
+export AWS_PAGER=""
+
 SCRIPT_NAME=$(basename $0)
 
 USAGE="$SCRIPT_NAME <instance-name>\nFor example: $SCRIPT_NAME akeller-dev-box"
