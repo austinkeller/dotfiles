@@ -252,6 +252,17 @@ alias gpu='branch=$(git branch | grep "\*" | awk "{ print \$2 }"); git push --se
 alias gr='git remote -v'
 alias gst='git status'
 
+function issue-title-to-git-branch() {
+  echo -n "Issue Title: "
+  read _issue_title
+  echo $_issue_title \
+    | tr '[:upper:]' '[:lower:]' \
+    | tr -d '`~!@#$%^&*()=+[]{}\|;:''",.<>/?\\' \
+    | sed -E 's/[-_]/ /g' \
+    | xargs \
+    | sed -E 's/[[:space:]]/-/g'
+}
+
 #
 # Go
 #
