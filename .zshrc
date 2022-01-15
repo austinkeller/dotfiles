@@ -360,7 +360,7 @@ then
       echo "Install pacmatic. See ~/.zshrc for more detail."
     fi
   else
-    echo "Install powerpill. See ~/.zshrc for more detail."
+    #echo "Install powerpill. See ~/.zshrc for more detail."
   fi
 fi
 
