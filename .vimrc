@@ -69,7 +69,7 @@ Plug 'Konfekt/FastFold'
 Plug 'mhinz/vim-signify'
 
 " A git wrapper.
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
 
 " Dim paragraphs above and below the active paragraph.
 Plug 'junegunn/limelight.vim'
