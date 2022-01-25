@@ -102,6 +102,10 @@ function is_centos {
   [ -f "/etc/centos-release" ]
 }
 
+function is_mac {
+  [ "$(uname -s)" = "Darwin" ]
+}
+
 # Allows for overriding shell functions
 function save_function {
   # Usage: save_function func new_func
@@ -162,8 +166,14 @@ fi
 # System aliases and helpers
 #
 
-alias ls='ls --color -N'
-alias ll='ls -lah --color=auto'
+if is_mac
+then
+  alias ls='ls -G'
+  alias ll='ls -lah'
+else
+  alias ls='ls --color -N'
+  alias ll='ls -lah --color=auto'
+fi
 
 function rl {
     ## rl: read log
@@ -193,7 +203,7 @@ alias dup='docker-compose up -d && dcl'
 #
 function _direnv_hook() {
   trap -- '' SIGINT;
-  eval "$("/usr/bin/direnv" export zsh)";
+  eval "$(direnv export zsh)";
   trap - SIGINT;
 }
 typeset -ag precmd_functions;
@@ -217,6 +227,9 @@ then
   if [[ -r /usr/share/fzf/completion.zsh ]]; then
     source /usr/share/fzf/completion.zsh
   fi
+elif is_mac
+then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 else
   if [[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
     source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -374,6 +387,9 @@ then
 elif is_centos
 then
   diff_highlight_path=/usr/share/doc/git-1.8.3.1/contrib/diff-highlight
+elif is_mac
+then
+  diff_highlight_path=$(brew --prefix git)/share/git-core/contrib/diff-highlight
 else
   diff_highlight_path=/usr/share/doc/git/contrib/diff-highlight
 fi

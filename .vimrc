@@ -156,7 +156,7 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set backupdir=/tmp//,.
-set clipboard=unnamedplus
+set clipboard=unnamedplus,unnamed
 set colorcolumn=80
 set complete-=i
 set completeopt=menuone,preview
