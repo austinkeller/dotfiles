@@ -93,19 +93,6 @@ function is_bin_in_path {
   builtin whence -p "$1" &> /dev/null
 }
 
-# Tests for distro-specific tools (e.g. package managers)
-function is_arch {
-  [ -f "/etc/arch-release" ]
-}
-
-function is_centos {
-  [ -f "/etc/centos-release" ]
-}
-
-function is_mac {
-  [ "$(uname -s)" = "Darwin" ]
-}
-
 # Allows for overriding shell functions
 function save_function {
   # Usage: save_function func new_func
