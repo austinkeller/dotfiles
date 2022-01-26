@@ -22,15 +22,6 @@ bindkey -e
 # For Python Poetry completions
 fpath+=~/.zfunc
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/akeller/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-bindkey '^R' history-incremental-search-backward
-
 if is_arch
 then
   ###########################################################
