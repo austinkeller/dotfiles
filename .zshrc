@@ -319,13 +319,6 @@ function tmux-fixssh {
 }
 
 #
-# node.js
-#
-if [[ -r /usr/share/nvm/init-nvm.sh ]]; then
-  source /usr/share/nvm/init-nvm.sh
-fi
-
-#
 # diff-highlight
 #
 # Add diff-highlight to path and verify
