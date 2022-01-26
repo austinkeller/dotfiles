@@ -358,14 +358,6 @@ fi
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
-# pyenv
-#
-if command -v pyenv 1>/dev/null 2>&1
-then
-  eval "$(pyenv init -)"
-fi
-
-#
 # python-direnv-init
 #
 # Initializes directory with a new python virtualenv that is automatically
@@ -377,14 +369,6 @@ export PATH="${VIRTUAL_ENV}/bin:$PATH"
 python3 -m venv $VIRTUAL_ENV
 EOF
 }
-
-#
-# ruby
-#
-if command -v rbenv 1>/dev/null 2>&1
-then
-  eval "$(rbenv init -)"
-fi
 
 #
 # Data engineering
