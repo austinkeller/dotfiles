@@ -31,56 +31,59 @@ compinit
 
 bindkey '^R' history-incremental-search-backward
 
-###########################################################
-# From https://wiki.archlinux.org/index.php/Zsh#Key_bindings
-############################################################
-# create a zkbd compatible hash;
-# to add other keys to this hash, see: man 5 terminfo
-typeset -g -A key
+if is_arch
+then
+  ###########################################################
+  # From https://wiki.archlinux.org/index.php/Zsh#Key_bindings
+  ############################################################
+  # create a zkbd compatible hash;
+  # to add other keys to this hash, see: man 5 terminfo
+  typeset -g -A key
 
-key[Home]="${terminfo[khome]}"
-key[End]="${terminfo[kend]}"
-key[Insert]="${terminfo[kich1]}"
-key[Backspace]="${terminfo[kbs]}"
-key[Delete]="${terminfo[kdch1]}"
-key[Up]="${terminfo[kcuu1]}"
-key[Down]="${terminfo[kcud1]}"
-key[Left]="${terminfo[kcub1]}"
-key[Right]="${terminfo[kcuf1]}"
-key[PageUp]="${terminfo[kpp]}"
-key[PageDown]="${terminfo[knp]}"
-key[ShiftTab]="${terminfo[kcbt]}"
+  key[Home]="${terminfo[khome]}"
+  key[End]="${terminfo[kend]}"
+  key[Insert]="${terminfo[kich1]}"
+  key[Backspace]="${terminfo[kbs]}"
+  key[Delete]="${terminfo[kdch1]}"
+  key[Up]="${terminfo[kcuu1]}"
+  key[Down]="${terminfo[kcud1]}"
+  key[Left]="${terminfo[kcub1]}"
+  key[Right]="${terminfo[kcuf1]}"
+  key[PageUp]="${terminfo[kpp]}"
+  key[PageDown]="${terminfo[knp]}"
+  key[ShiftTab]="${terminfo[kcbt]}"
 
-# setup key accordingly
-[[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"      beginning-of-line
-[[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"       end-of-line
-[[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"    overwrite-mode
-[[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
-[[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"    delete-char
-[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
-[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
-[[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"      backward-char
-[[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"     forward-char
-[[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
-[[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
-[[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"  reverse-menu-complete
+  # setup key accordingly
+  [[ -n "${key[Home]}"      ]] && bindkey -- "${key[Home]}"      beginning-of-line
+  [[ -n "${key[End]}"       ]] && bindkey -- "${key[End]}"       end-of-line
+  [[ -n "${key[Insert]}"    ]] && bindkey -- "${key[Insert]}"    overwrite-mode
+  [[ -n "${key[Backspace]}" ]] && bindkey -- "${key[Backspace]}" backward-delete-char
+  [[ -n "${key[Delete]}"    ]] && bindkey -- "${key[Delete]}"    delete-char
+  [[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"        up-line-or-history
+  [[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"      down-line-or-history
+  [[ -n "${key[Left]}"      ]] && bindkey -- "${key[Left]}"      backward-char
+  [[ -n "${key[Right]}"     ]] && bindkey -- "${key[Right]}"     forward-char
+  [[ -n "${key[PageUp]}"    ]] && bindkey -- "${key[PageUp]}"    beginning-of-buffer-or-history
+  [[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"  end-of-buffer-or-history
+  [[ -n "${key[ShiftTab]}"  ]] && bindkey -- "${key[ShiftTab]}"  reverse-menu-complete
 
-# Finally, make sure the terminal is in application mode, when zle is
-# active. Only then are the values from $terminfo valid.
-if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
-	autoload -Uz add-zle-hook-widget
-	function zle_application_mode_start {
-		echoti smkx
-	}
-	function zle_application_mode_stop {
-		echoti rmkx
-	}
-	add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
-	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+  # Finally, make sure the terminal is in application mode, when zle is
+  # active. Only then are the values from $terminfo valid.
+  if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+    autoload -Uz add-zle-hook-widget
+    function zle_application_mode_start {
+      echoti smkx
+    }
+    function zle_application_mode_stop {
+      echoti rmkx
+    }
+    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+  fi
+  ######################
+  # End key bindings fix
+  ######################
 fi
-######################
-# End key bindings fix
-######################
 
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
@@ -331,39 +334,6 @@ if [[ -r /usr/share/nvm/init-nvm.sh ]]; then
   source /usr/share/nvm/init-nvm.sh
 fi
 
-if is_arch
-then
-  #
-  # pacman wrappers
-  #
-  if is_bin_in_path powerpill
-  then
-    # Speed up yay with concurrent downloads using powerpill
-    function yay {
-      if [ $(which python) = "/usr/bin/python" ] || [ $(pyenv which python) = "/usr/bin/python" ]; then
-	command yay --pacman powerpill "$@"
-      else
-	echo "You must be using system python in order to run yay. See ~/.zshrc"
-      fi
-    }
-
-    # Add alias `pac` for running pacmatic wrapping yay wrapping powerpill
-    # See https://unix.stackexchange.com/questions/384101/have-pacmatic-wrap-yay-wrap-powerpill-wrap-pacman
-    if is_bin_in_path pacmatic
-    then
-      # pacmatic needs to be run as root: https://github.com/keenerd/pacmatic/issues/35
-      alias pacmatic='sudo --preserve-env=pacman_program /usr/bin/pacmatic'
-
-      # Downgrade permissions as AUR helpers expect to be run as a non-root user. $UID is read-only in {ba,z}sh.
-      alias pac='pacman_program="sudo -u #$UID /usr/bin/yay --pacman powerpill" pacmatic'
-    else
-      echo "Install pacmatic. See ~/.zshrc for more detail."
-    fi
-  else
-    #echo "Install powerpill. See ~/.zshrc for more detail."
-  fi
-fi
-
 #
 # diff-highlight
 #
@@ -386,40 +356,6 @@ if [[ -f $diff_highlight_path/diff-highlight && ! -x $diff_highlight_path/diff-h
   echo "sudo chmod a+x $diff_highlight_path/diff-highlight"
 fi
 is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
-
-#
-# Gnome
-#
-# Allow setting up a simple notification server locally that can be reached by
-# my remotes over ssh
-function start-notify-server {
-  nohup ncat -klc "/usr/bin/notify-send remote-notify foobar && paplay --volume $((2**16 * 50/100)) /usr/share/sounds/freedesktop/stereo/complete.oga" localhost ${NOTIFY_ME_PORT:=10009} > /dev/null 2>&1 &; disown
-}
-
-function stop-notify-server {
-  pkill ncat
-}
-
-function start-notify-tunnel {
-  local USAGE="$0 <ssh-remote> [remote-port]\nFor example: $0 desky, or $0 desky 10008"
-
-  if [ -z "$1" ]; then
-    echo $USAGE
-  return 1
-  elif [[ $* == *-h* ]]; then
-    echo $USAGE
-    return 0
-  else
-    local REMOTE_HOST=$1
-  fi
-
-  ssh -N -R ${2:=10008}:localhost:${NOTIFY_ME_PORT:=10009} $REMOTE_HOST
-}
-
-function notify-me {
-  # ignore error code
-  ncat --idle-timeout 1s localhost ${1:=10008} || true
-}
 
 #
 # pyenv
