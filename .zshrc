@@ -273,6 +273,18 @@ export PATH="$PATH:${GOPATH//://bin:}/bin"
 export GPG_TTY=$TTY
 
 #
+# IntelliJ Idea
+#
+
+if is_mac
+then
+  function intellij-idea {
+    open -na "IntelliJ IDEA.app" --args "$@"
+  }
+fi
+
+
+#
 # Kubernetes
 #
 alias k='kubectl'
