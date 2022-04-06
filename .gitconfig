@@ -19,6 +19,45 @@
   show = diff-highlight | less
   diff = diff-highlight | less
 [alias]
+  # list aliases
+  la = "!git config -l | grep alias | cut -c 7-"
+
+  a = add
+  aa = add -A .
+  ap = add -p
+
+  # list branches sorted by last modified
+  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  br = branch
+  brd = branch -d
+  brD = branch -D
+  merged = branch --merged
+  delete-merged-branches = !git --no-pager branch --format="%(refname:lstrip=2)" --merged | egrep -v '(^\\*|master|main|develop)' | xargs git branch -d
+
+  co = checkout
+  cob = checkout -b
+
+  cp = cherry-pick
+
+  c = commit --verbose
+  ca = commit -a --verbose
+  cm = commit -m
+  cam = commit -a -m
+  m = commit --amend --verbose
+  amend = commit --amend -m --verbose
+
+  d = diff
+  ds = diff --stat
+  dc = diff --cached
+  diff-since-merge = "!git diff $(git merge-base develop HEAD)"
+
+  f = fetch
+  fa = fetch --all
+
+  gr = grep -Ii
+
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   lg = !"git lg1-specific"
   lga = !"git lg1-specific --all"
   lgas = !"git lga --simplify-by-decoration"
@@ -29,34 +68,22 @@
   lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
   lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
 
-  co = checkout
-  cob = checkout -b
-  coo = !git fetch && git checkout
-  br = branch
-  brd = branch -d
-  brD = branch -D
-  merged = branch --merged
-  st = status
-  aa = add -A .
-  cm = commit -m
-  aacm = !git add -A . && git commit -m
-  cp = cherry-pick
-  amend = commit --amend -m
-  master = !git checkout master && git pull origin
-  po = push origin
-  pom = push origin master
-  poh = push origin HEAD
+  l = "!git ls-files | grep -i"
+
   plo = pull origin
   plom = pull origin master
   ploh = pull origin HEAD
+
+  po = push origin
+  pom = !git push origin $(git main)
+  poh = push origin HEAD
+
+  main = !git remote show origin | sed -n '/HEAD branch/s/.*: //p'
+
   unstage = reset --soft HEAD^
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  f = "!git ls-files | grep -i"
-  gr = grep -Ii
-  la = "!git config -l | grep alias | cut -c 7-"
-  diff-since-merge = "!git diff $(git merge-base develop HEAD)"
-  delete-merged-branches = !git --no-pager branch --no-color --format="%(refname:lstrip=2)" --merged | egrep -v '(^\\*|master|main|develop)' | xargs git branch -d
+
+  s = status -s
+  st = status
 [commit]
 	gpgsign = true
 [pull]
