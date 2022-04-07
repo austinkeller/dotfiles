@@ -40,9 +40,7 @@
   cp = cherry-pick
 
   c = commit --verbose
-  ca = commit -a --verbose
   cm = commit -m
-  cam = commit -a -m
   m = commit --amend --verbose
   amend = commit --amend -m --verbose
 
@@ -80,7 +78,7 @@
 
   main = !git remote show origin | sed -n '/HEAD branch/s/.*: //p'
 
-  unstage = reset --soft HEAD^
+  unstage = git restore --staged .
 
   s = status -s
   st = status
