@@ -232,6 +232,7 @@ fi
 alias git='noglob git'
 
 alias g='git'
+alias gi='git'
 
 function git-delete-merged-branches() {
   git --no-pager branch --format=%(refname:lstrip=2) --merged | egrep -v '^(\*|develop)$' | egrep -v "^($(git main))$" | xargs git branch -d

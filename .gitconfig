@@ -32,7 +32,8 @@
   brd = branch -d
   brD = branch -D
   merged = branch --merged
-  delete-merged-branches = !git --no-pager branch --format="%(refname:lstrip=2)" --merged | egrep -v '(^\\*|master|main|develop)' | xargs git branch -d
+  delete-merged-branches = ! "f() { git --no-pager branch --format=\"%(refname:lstrip=2)\" --merged | egrep -v \"(^\\*|master|main|develop)\" | xargs git branch -d; }; f"
+  delete-local-and-remote = !"f() { git branch -D $1; git push origin -d $1; }; f"
 
   co = checkout
   cob = checkout -b
@@ -42,7 +43,7 @@
   c = commit --verbose
   cm = commit -m
   m = commit --amend --verbose
-  amend = commit --amend -m --verbose
+  amend = commit --amend --verbose
 
   d = diff
   ds = diff --stat
@@ -65,6 +66,8 @@
   lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(blue)%G?%C(reset) %C(bold green)%<(14)%ar%C(reset) %C(dim white)%<(14)%an%C(reset) %C(white)%s%C(reset)%C(auto)%d%C(reset)'
   lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
   lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+  # See what new commits have been created by the last command (e.g. after git pull)
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
   l = "!git ls-files | grep -i"
 
