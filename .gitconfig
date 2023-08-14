@@ -86,7 +86,7 @@
   s = status -s
   st = status
 [commit]
-	gpgsign = true
+	gpgsign = false
 [pull]
 	ff = only
 [init]
