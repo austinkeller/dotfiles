@@ -151,14 +151,8 @@ fi
 # System aliases and helpers
 #
 
-if is_mac
-then
-  alias ls='ls -G'
-  alias ll='ls -lah'
-else
-  alias ls='ls --color -N'
-  alias ll='ls -lah --color=auto'
-fi
+alias ls='ls --color -N'
+alias ll='ls -lah --color=auto'
 
 function rl {
     ## rl: read log
@@ -218,7 +212,10 @@ then
   fi
 elif is_mac
 then
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  if [ -n "${commands[fzf-share]}" ]; then
+    source "$(fzf-share)/key-bindings.zsh"
+    source "$(fzf-share)/completion.zsh"
+  fi
 else
   if [[ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]]; then
     source /usr/share/doc/fzf/examples/key-bindings.zsh
@@ -326,29 +323,6 @@ function ssh-keygen-ez {
 function tmux-fixssh {
   eval $(tmux show-env -s |grep '^SSH_')
 }
-
-#
-# diff-highlight
-#
-# Add diff-highlight to path and verify
-if is_arch
-then
-  diff_highlight_path=/usr/share/git/diff-highlight
-elif is_centos
-then
-  diff_highlight_path=/usr/share/doc/git-1.8.3.1/contrib/diff-highlight
-elif is_mac
-then
-  diff_highlight_path=$(brew --prefix git)/share/git-core/contrib/diff-highlight
-else
-  diff_highlight_path=/usr/share/doc/git/contrib/diff-highlight
-fi
-export PATH=$PATH:$diff_highlight_path
-if [[ -f $diff_highlight_path/diff-highlight && ! -x $diff_highlight_path/diff-highlight ]]; then
-  echo "diff-highlight found but is not executable. Fix with the following command:"
-  echo "sudo chmod a+x $diff_highlight_path/diff-highlight"
-fi
-is_bin_in_path diff-highlight || echo "diff-highlight not found, fix your .zshrc"
 
 #
 # python-direnv-init

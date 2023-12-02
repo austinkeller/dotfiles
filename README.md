@@ -1,5 +1,23 @@
 # austinkeller's dotfiles
 
+## nix
+
+Package management is done using Nix to provide a declarative, reproducible and consistent development environment. My setup is based on that of [checkoway](https://checkoway.net/musings/nix/).
+
+Any packages to be installed are declared in `env.nix`.
+
+To install packages:
+
+```
+nix-env -irf env.nix
+```
+
+To update packages:
+
+```
+nix-update-nixpkgs
+```
+
 ## tmux
 
 ### Files

@@ -1,0 +1,24 @@
+with import <nixpkgs> {}; [
+  calc
+  coreutils-full
+  diff-so-fancy
+  direnv
+  esphome
+  fd
+  ffmpeg
+  fzf
+  git
+  gnupg
+  jq
+  perl
+  pyenv
+  python3
+  ripgrep
+  qemu
+  shellcheck
+  socat
+  tfswitch
+  tmux
+  tree
+  yt-dlp
+]
