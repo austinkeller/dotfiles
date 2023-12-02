@@ -81,6 +81,7 @@ fi
 
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/bin
 
 # Add snap bin
 export PATH=$PATH:/snap/bin
