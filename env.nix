@@ -1,4 +1,5 @@
-with import <nixpkgs> {}; [
+with import <nixpkgs> { };
+[
   calc
   coreutils-full
   diff-so-fancy
@@ -11,9 +12,15 @@ with import <nixpkgs> {}; [
   gnupg
   jq
   nix-direnv
+  nixpkgs-fmt
   perl
   pyenv
-  python3
+  (python3.withPackages (ps: with ps; [
+    black
+    flake8
+    pylint
+    pytest
+  ]))
   qemu
   ripgrep
   shellcheck
