@@ -10,15 +10,17 @@ with import <nixpkgs> {}; [
   git
   gnupg
   jq
+  nix-direnv
   perl
   pyenv
   python3
-  ripgrep
   qemu
+  ripgrep
   shellcheck
   socat
   tfswitch
   tmux
   tree
+  wget
   yt-dlp
 ]
