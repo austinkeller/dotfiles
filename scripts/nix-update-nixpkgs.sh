@@ -37,7 +37,7 @@ for arg in "$@"; do
 done
 
 
-revision=$(curl --silent --show-error 'https://monitoring.nixos.org/prometheus/api/v1/query?query=channel_revision' \
+revision=$(curl -L --silent --show-error 'https://monitoring.nixos.org/prometheus/api/v1/query?query=channel_revision' \
   | jq -r '.data.result[]|select(.metric.status == "stable" and .metric.variant == "darwin").metric.revision')
 nixexpr="import (fetchTarball \"https://github.com/NixOS/nixpkgs/archive/${revision}.tar.gz\")"
 nixpkgsfile=~/.nix-defexpr/nixpkgs/default.nix
