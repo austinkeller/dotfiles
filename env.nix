@@ -28,6 +28,7 @@ with import <nixpkgs> { };
   tfswitch
   tmux
   tree
+  wakeonlan
   wget
   yt-dlp
 ]
