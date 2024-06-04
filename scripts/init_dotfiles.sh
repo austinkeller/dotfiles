@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+ln -s -T "$(pwd)" ~/.dotfiles
+
 cd $HOME
 
 ln -s .dotfiles/env.nix
