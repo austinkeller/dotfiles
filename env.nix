@@ -17,12 +17,6 @@ with import <nixpkgs> { };
   nmap
   perl
   pyenv
-  (python3.withPackages (ps: with ps; [
-    black
-    flake8
-    pylint
-    pytest
-  ]))
   qemu
   ripgrep
   shellcheck
@@ -30,6 +24,7 @@ with import <nixpkgs> { };
   tfswitch
   tmux
   tree
+  vim
   wakeonlan
   wget
   yt-dlp
