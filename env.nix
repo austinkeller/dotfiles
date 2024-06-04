@@ -1,5 +1,6 @@
 with import <nixpkgs> { };
 [
+  bun
   calc
   coreutils-full
   diff-so-fancy
@@ -13,6 +14,7 @@ with import <nixpkgs> { };
   jq
   nix-direnv
   nixpkgs-fmt
+  nmap
   perl
   pyenv
   (python3.withPackages (ps: with ps; [
