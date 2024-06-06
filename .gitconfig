@@ -1,100 +1,104 @@
 [user]
-  email = austin474@gmail.com
-  name = Austin Keller
-  signingkey = 9778A77B70CD4C532F4BD7E84625E306453A9AAC
+	email = austin474@gmail.com
+	name = Austin Keller
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMMvmx1RhpgLTuLjbp3PHpRahBHs1RE1nl2pOaFhohAZ austinkeller@Austins-MacBook-Pro.local github
 [push]
-  default = current
+	default = current
 [core]
-  autocrlf = input
-  pager = diff-so-fancy | less
+	autocrlf = input
+	pager = diff-so-fancy | less
 [color]
-  ui = always
+	ui = always
 [color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 [color "diff-so-fancy"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 [pager]
-  log = diff-so-fancy | less
-  show = diff-so-fancy | less
-  diff = diff-so-fancy | less
+	log = diff-so-fancy | less
+	show = diff-so-fancy | less
+	diff = diff-so-fancy | less
 [alias]
-  # list aliases
-  la = "!git config -l | grep alias | cut -c 7-"
+	# list aliases
+	la = "!git config -l | grep alias | cut -c 7-"
 
-  a = add
-  aa = add -A .
-  ap = add -p
+	a = add
+	aa = add -A .
+	ap = add -p
 
-  # list branches sorted by last modified
-  b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
-  br = branch
-  brd = branch -d
-  brD = branch -D
-  merged = branch --merged
-  delete-merged-branches = ! "f() { git --no-pager branch --format=\"%(refname:lstrip=2)\" --merged | egrep -v \"(^\\*|master|main|develop)\" | xargs git branch -d; }; f"
-  delete-local-and-remote = !"f() { git branch -D $1; git push origin -d $1; }; f"
+	# list branches sorted by last modified
+	b = "!git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+	br = branch
+	brd = branch -d
+	brD = branch -D
+	merged = branch --merged
+	delete-merged-branches = ! "f() { git --no-pager branch --format=\"%(refname:lstrip=2)\" --merged | egrep -v \"(^\\*|master|main|develop)\" | xargs git branch -d; }; f"
+	delete-local-and-remote = !"f() { git branch -D $1; git push origin -d $1; }; f"
 
-  co = checkout
-  cob = checkout -b
+	co = checkout
+	cob = checkout -b
 
-  cp = cherry-pick
+	cp = cherry-pick
 
-  c = commit --verbose
-  cm = commit -m
-  m = commit --amend --verbose
-  amend = commit --amend --verbose
+	c = commit --verbose
+	cm = commit -m
+	m = commit --amend --verbose
+	amend = commit --amend --verbose
 
-  d = diff
-  ds = diff --stat
-  dc = diff --cached
-  diff-since-merge = "!git diff $(git merge-base develop HEAD)"
+	d = diff
+	ds = diff --stat
+	dc = diff --cached
+	diff-since-merge = "!git diff $(git merge-base develop HEAD)"
 
-  f = fetch
-  fa = fetch --all
+	f = fetch
+	fa = fetch --all
 
-  gr = grep -Ii
+	gr = grep -Ii
 
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  lg = !"git lg1-specific"
-  lga = !"git lg1-specific --all"
-  lgas = !"git lga --simplify-by-decoration"
-  lg1 = !"git lg1-specific"
-  lg2 = !"git lg2-specific"
-  lg3 = !"git lg3-specific"
-  lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(blue)%G?%C(reset) %C(bold green)%<(14)%ar%C(reset) %C(dim white)%<(14)%an%C(reset) %C(white)%s%C(reset)%C(auto)%d%C(reset)'
-  lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
-  lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
-  # See what new commits have been created by the last command (e.g. after git pull)
-  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lg = !"git lg1-specific"
+	lga = !"git lg1-specific --all"
+	lgas = !"git lga --simplify-by-decoration"
+	lg1 = !"git lg1-specific"
+	lg2 = !"git lg2-specific"
+	lg3 = !"git lg3-specific"
+	lg1-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(blue)%G?%C(reset) %C(bold green)%<(14)%ar%C(reset) %C(dim white)%<(14)%an%C(reset) %C(white)%s%C(reset)%C(auto)%d%C(reset)'
+	lg2-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)'
+	lg3-specific = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset) %C(bold cyan)(committed: %cD)%C(reset) %C(auto)%d%C(reset)%n''          %C(white)%s%C(reset)%n''          %C(dim white)- %an <%ae> %C(reset) %C(dim white)(committer: %cn <%ce>)%C(reset)'
+	# See what new commits have been created by the last command (e.g. after git pull)
+	new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 
-  l = "!git ls-files | grep -i"
+	l = "!git ls-files | grep -i"
 
-  plo = pull origin
-  plom = pull origin master
-  ploh = pull origin HEAD
+	plo = pull origin
+	plom = pull origin master
+	ploh = pull origin HEAD
 
-  po = push origin
-  pom = !git push origin $(git main)
-  poh = push origin HEAD
+	po = push origin
+	pom = !git push origin $(git main)
+	poh = push origin HEAD
 
-  main = !git remote show origin | sed -n '/HEAD branch/s/.*: //p'
+	main = !git remote show origin | sed -n '/HEAD branch/s/.*: //p'
 
-  unstage = git restore --staged .
+	unstage = git restore --staged .
 
-  s = status -s
-  st = status
+	s = status -s
+	st = status
 [commit]
-	gpgsign = false
+	gpgsign = true
 [pull]
 	ff = only
 [init]
 	defaultBranch = main
 [fetch]
 	prune = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers

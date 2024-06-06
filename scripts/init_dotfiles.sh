@@ -18,6 +18,9 @@ cd "${ZDOTDIR:-$HOME}"/.zprezto
 git remote add upstream https://github.com/sorin-ionescu/prezto.git
 cd $HOME
 
+mkdir $HOME/.ssh
+cp .dotfiles/ssh/allowed_signers $HOME/.ssh/allowed_signers
+
 setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^(README.md|zshrc)(N); do
   echo "$rcfile"
