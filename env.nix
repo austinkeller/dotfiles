@@ -5,17 +5,18 @@ with import <nixpkgs> { };
   coreutils-full
   diff-so-fancy
   direnv
-  esphome
   fd
   ffmpeg
   fzf
   git
+  git-lfs
   gnupg
   jq
   nix-direnv
   nixpkgs-fmt
   nmap
   perl
+  poetry
   pyenv
   qemu
   ripgrep
