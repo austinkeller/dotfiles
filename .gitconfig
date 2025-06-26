@@ -1,6 +1,7 @@
 [user]
 	email = austin474@gmail.com
 	name = Austin Keller
+	signingkey = key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMMvmx1RhpgLTuLjbp3PHpRahBHs1RE1nl2pOaFhohAZ austinkeller@Austins-MacBook-Pro.local github
 [push]
 	default = current
 [core]
@@ -95,3 +96,9 @@
 	defaultBranch = main
 [fetch]
 	prune = true
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	allowedSignersFile = /Users/austinkeller/.ssh/allowed_signers
