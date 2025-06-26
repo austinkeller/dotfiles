@@ -9,6 +9,7 @@ with import <nixpkgs> { };
   ffmpeg
   fzf
   git
+  git-filter-repo
   git-lfs
   gnupg
   jq
