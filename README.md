@@ -2,21 +2,26 @@
 
 ## nix
 
-Package management is done using Nix to provide a declarative, reproducible and consistent development environment. My setup is based on that of [checkoway](https://checkoway.net/musings/nix/).
+Package management is done using Nix via [Home Manager](https://nix-community.github.io/home-manager/).
 
-Any packages to be installed are declared in `env.nix`.
+TODO determine if nix-update-nixpkgs is behaving more reasonably than home-manager (e.g., maybe it's better to use the nix-update-nixpkgs script to update the nix-channel, after which `home-manager switch` will work?)
 
-To install packages:
+Any packages to be installed are declared in `home.nix`.
+
+To install packages after adding/removing from the `home.nix` file, run:
 
 ```
-nix-env -irf env.nix
+home-manager switch
 ```
 
 To update packages:
 
 ```
 nix-update-nixpkgs
+home-manager switch
 ```
+
+Packages are updated by default to use the latest stable Darwin version. To use the latest available version, prefix the package names in `home.nix` with `unstable.`.
 
 ## tmux
 

@@ -79,6 +79,9 @@ then
   ######################
 fi
 
+# Nix - use pinned nixpkgs, preserve home-manager channel
+export NIX_PATH="nixpkgs=$HOME/.nix-defexpr/nixpkgs:home-manager=$HOME/.nix-defexpr/channels/home-manager"
+
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/bin

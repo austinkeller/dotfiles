@@ -8,5 +8,5 @@ if [ -z "$CODESPACES" ]; then
     git config --global gpg.format ssh
     git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 else
-    nix-env -irf ~/env.nix
+    home-manager switch
 fi

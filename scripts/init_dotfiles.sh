@@ -4,9 +4,13 @@ ln -s -T "$(pwd)" ~/.dotfiles
 
 cd $HOME
 
-ln -s .dotfiles/env.nix
-mkdir -p .nix-defexpr
-ln -s -T ~/.dotfiles/.nix-defexpr/nixpkgs .nix-defexpr/nixpkgs
+mkdir -p .config/home-manager
+ln -sf $HOME/.dotfiles/scripts/nix-diff.sh $HOME/.local/bin/nix-diff
+ln -sf $HOME/.dotfiles/scripts/nix-update-nixpkgs.sh $HOME/.local/bin/nix-update-nixpkgs
+ln -sf $HOME/.dotfiles/scripts/start-ec2.sh $HOME/.local/bin/start-ec2
+ln -sf $HOME/.dotfiles/scripts/stop-ec2.sh $HOME/.local/bin/stop-ec2
+ln -sf $HOME/.dotfiles/scripts/switch-ec2.sh $HOME/.local/bin/switch-ec2
+ln -sf ~/.dotfiles/home.nix .config/home-manager/home.nix
 ln -s .dotfiles/.gitconfig
 ln -s .dotfiles/.tmux.conf
 ln -s .dotfiles/.vimrc
@@ -29,8 +33,5 @@ done
 
 mkdir -p $HOME/.local/bin
 
-ln -sf $HOME/.dotfiles/scripts/nix-diff.sh $HOME/.local/bin/nix-diff
-ln -sf $HOME/.dotfiles/scripts/nix-update-nixpkgs.sh $HOME/.local/bin/nix-update-nixpkgs
-ln -sf $HOME/.dotfiles/scripts/start-ec2.sh $HOME/.local/bin/start-ec2
-ln -sf $HOME/.dotfiles/scripts/stop-ec2.sh $HOME/.local/bin/stop-ec2
-ln -sf $HOME/.dotfiles/scripts/switch-ec2.sh $HOME/.local/bin/switch-ec2
+# Link any custom scripts here
+ln -sf $HOME/.dotfiles/scripts/fix.sh $HOME/.local/bin/fix
