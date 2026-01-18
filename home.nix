@@ -43,9 +43,10 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+    # keep-sorted start
     bun
     calc
-    unstable.claude-code
     codex
     coreutils-full
     diff-so-fancy
@@ -59,12 +60,14 @@ in
     git-lfs
     gnupg
     jq
+    keep-sorted
+    neovim
     nix-direnv
     nixpkgs-fmt
     nmap
-    neovim
     perl
     poetry
+    pre-commit
     pyenv
     qemu
     ripgrep
@@ -73,19 +76,25 @@ in
     tfswitch
     tmux
     tree
+    unstable.claude-code
     uv
     vim
     wakeonlan
     wget
     yt-dlp
+    # keep-sorted end
   ]
   # macOS-specific packages
   ++ lib.optionals stdenv.isDarwin [
+    # keep-sorted start
     pinentry_mac
+    # keep-sorted end
   ]
   # Linux-specific packages
   ++ lib.optionals stdenv.isLinux [
-    pinentry-gtk2  # or pinentry-gnome3, pinentry-curses, etc.
+    # keep-sorted start
+    # Add Linux packages here.
+    # keep-sorted end
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
