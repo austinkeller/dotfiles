@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   # Unstable nixpkgs pinned to specific commit for reproducibility
@@ -78,6 +78,14 @@ in
     wakeonlan
     wget
     yt-dlp
+  ]
+  # macOS-specific packages
+  ++ lib.optionals stdenv.isDarwin [
+    pinentry_mac
+  ]
+  # Linux-specific packages
+  ++ lib.optionals stdenv.isLinux [
+    pinentry-gtk2  # or pinentry-gnome3, pinentry-curses, etc.
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
