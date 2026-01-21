@@ -417,6 +417,13 @@ function ml-workspace {
 }
 
 ############################################################################
+# Claude Code compatibility - disable rcquotes when running in Claude Code
+############################################################################
+if [[ -n "${CLAUDECODE}" ]]; then
+  unsetopt rcquotes
+fi
+
+############################################################################
 # Add custom zsh configurations that only apply to this system
 ############################################################################
 [[ -f ~/.zshrc_conda ]] && . ~/.zshrc_conda || true
