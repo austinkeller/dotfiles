@@ -1,14 +1,5 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, unstable ? pkgs, ... }:
 
-let
-  # Unstable nixpkgs pinned to specific commit for reproducibility
-  # Updated by: nix-update-unstable
-  unstableTarball = fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/61db79b0c6b838d9894923920b612048e1201926.tar.gz";
-    sha256 = "1zihs797ra009jl5knx7p4qk38wa1rmarfy286y8ywjv5wbx35l7"; # unstable
-  };
-  unstable = import unstableTarball {};
-in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -47,14 +38,12 @@ in
     # keep-sorted start
     bun
     calc
-    codex
     coreutils-full
     diff-so-fancy
     direnv
     fd
     ffmpeg
     fzf
-    gemini-cli
     git
     git-filter-repo
     git-lfs
@@ -77,6 +66,8 @@ in
     tmux
     tree
     unstable.claude-code
+    unstable.codex
+    unstable.gemini-cli
     uv
     vim
     wakeonlan

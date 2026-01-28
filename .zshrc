@@ -4,7 +4,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+# Skip in Claude Code to avoid shell snapshot parsing bugs
+if [[ -z "${CLAUDECODE}" ]] && [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -79,8 +80,8 @@ then
   ######################
 fi
 
-# Nix - use pinned nixpkgs, preserve home-manager channel
-export NIX_PATH="nixpkgs=$HOME/.nix-defexpr/nixpkgs:home-manager=$HOME/.nix-defexpr/channels/home-manager"
+# Nix - no longer needed with flakes (NIX_PATH was for channel-based setup)
+# export NIX_PATH="nixpkgs=$HOME/.nix-defexpr/nixpkgs:home-manager=$HOME/.nix-defexpr/channels/home-manager"
 
 # Add local bin
 export PATH=$PATH:$HOME/.local/bin
@@ -157,6 +158,8 @@ fi
 alias ls='ls --color -N'
 alias ll='ls -lah --color=auto'
 
+# Skip rl function in Claude Code due to shell snapshot parsing issues with jq interpolation syntax
+if [[ -z "${CLAUDECODE}" ]]; then
 function rl {
     ## rl: read log
     ## journalctl wrapper with nice output format and colors based on log event severity.
@@ -173,6 +176,7 @@ function rl {
         | sh \
         | perl -e 'my $c_to_sev = {0 => "48;5;9", 1 => "48;5;5", 2 => "38;5;9", 3 => "38;5;1", 4 => "38;5;5", 5 => "38;5;2", 6 => "38;5;2"}; while (<>) { s#^(([0-6])(?: [^ ]+){5})(.*)#\e[$c_to_sev->{$2}m$1\e[m$3#; print; }'
 }
+fi
 
 #
 # Docker
@@ -351,6 +355,8 @@ function dbt {
 #
 # Data analysis tools
 #
+# Skip these in Claude Code due to shell snapshot parsing issues with multi-line aliases and heredocs
+if [[ -z "${CLAUDECODE}" ]]; then
 alias rstudio='docker run \
   --rm \
   -d \
@@ -397,6 +403,7 @@ function jupyter-url {
     command grep -m1 -o 'http://127.0.0.1:[0-9]*/.*?token=[0-9a-z]*' | \
     sed "s/127.0.0.1:[0-9]*/127.0.0.1:${__PORT}/"
 }
+fi
 
 function ml-workspace {
   __PORT=${ML_WORKSPACE_PORT:=8788}
@@ -417,10 +424,13 @@ function ml-workspace {
 }
 
 ############################################################################
-# Claude Code compatibility - disable rcquotes when running in Claude Code
+# Claude Code compatibility
 ############################################################################
 if [[ -n "${CLAUDECODE}" ]]; then
+  # Disable rcquotes to prevent quote escaping issues
   unsetopt rcquotes
+  # Use simple prompt instead of powerlevel10k to avoid shell snapshot parsing bugs
+  POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 fi
 
 ############################################################################
@@ -434,7 +444,10 @@ fi
 [[ -f ~/.zshrc_smartsheet ]] && . ~/.zshrc_smartsheet || true
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/.p10k.zsh.
-[[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
+# Skip powerlevel10k in Claude Code to avoid shell snapshot parsing bugs
+if [[ -z "${CLAUDECODE}" ]]; then
+  [[ ! -f ~/.dotfiles/.p10k.zsh ]] || source ~/.dotfiles/.p10k.zsh
+fi
 
 # Added by Antigravity
 export PATH="/Users/austinkeller/.antigravity/antigravity/bin:$PATH"

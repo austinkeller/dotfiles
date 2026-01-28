@@ -1,27 +1,55 @@
 # austinkeller's dotfiles
 
-## nix
+## Nix
 
-Package management is done using Nix via [Home Manager](https://nix-community.github.io/home-manager/).
+Package management is done using [Determinate Nix](https://determinate.systems/nix/) with [Home Manager](https://nix-community.github.io/home-manager/) via flakes.
 
-TODO determine if nix-update-nixpkgs is behaving more reasonably than home-manager (e.g., maybe it's better to use the nix-update-nixpkgs script to update the nix-channel, after which `home-manager switch` will work?)
+### Installation
 
-Any packages to be installed are declared in `home.nix`.
+1. Install Determinate Nix:
+   ```
+   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+   ```
 
-To install packages after adding/removing from the `home.nix` file, run:
+2. Clone this repo and run the install script:
+   ```
+   git clone https://github.com/austinkeller/dotfiles.git ~/git/github.com/austinkeller/dotfiles
+   cd ~/git/github.com/austinkeller/dotfiles
+   ./install.sh
+   ```
+
+3. Activate Home Manager:
+   ```
+   home-manager switch --flake '.#austinkeller'
+   ```
+
+### Managing Packages
+
+Packages are declared in `home.nix`. After modifying:
 
 ```
-home-manager switch
+home-manager switch --flake '.#austinkeller'
 ```
 
-To update packages:
-
+Or use the convenience alias (after first activation):
 ```
-nix-update-nixpkgs
-home-manager switch
+hms
 ```
 
-Packages are updated by default to use the latest stable Darwin version. To use the latest available version, prefix the package names in `home.nix` with `unstable.`.
+### Updating Packages
+
+To update all flake inputs (nixpkgs, home-manager) to their latest versions:
+
+```
+nix flake update
+home-manager switch --flake '.#austinkeller'
+```
+
+### Stable vs Unstable Packages
+
+- By default, packages come from the stable Darwin channel (`nixpkgs-25.11-darwin`)
+- For bleeding-edge versions, prefix with `unstable.` (e.g., `unstable.claude-code`)
+- Unstable packages come from `nixpkgs-unstable`
 
 ## tmux
 
