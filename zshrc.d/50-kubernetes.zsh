@@ -1,0 +1,5 @@
+#
+# Kubernetes
+#
+
+alias k='kubectl'
