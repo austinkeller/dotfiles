@@ -54,6 +54,7 @@
     nix-direnv
     nixpkgs-fmt
     nmap
+    nodejs
     perl
     poetry
     pre-commit
