@@ -11,6 +11,7 @@ ln -sf ~/.dotfiles/flake.nix .config/home-manager/flake.nix
 ln -sf ~/.dotfiles/flake.lock .config/home-manager/flake.lock
 
 # Link dotfiles
+ln -sf .dotfiles/AGENTS.md AGENTS.md
 ln -sf .dotfiles/.gitconfig .gitconfig
 ln -sf .dotfiles/.tmux.conf .tmux.conf
 ln -sf .dotfiles/.vimrc .vimrc

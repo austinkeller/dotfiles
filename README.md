@@ -23,6 +23,10 @@ Package management is done using [Determinate Nix](https://determinate.systems/n
    home-manager switch --flake '.#austinkeller'
    ```
 
+### Agent Instructions
+
+`./install.sh` links `~/AGENTS.md` to this repo's `AGENTS.md` so local coding agents inherit the default instructions.
+
 ### Managing Packages
 
 Packages are declared in `home.nix`. After modifying:
@@ -107,4 +111,3 @@ These are for tools that I don't typically use, but can be helpful when my tools
 ### Usage
 
 This is a windowing tool like tmux that is usually installed by default on linux systems.
-
