@@ -5,6 +5,7 @@
 # Add local bin directories
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.npm-global/bin
 
 # Add snap bin
 export PATH=$PATH:/snap/bin

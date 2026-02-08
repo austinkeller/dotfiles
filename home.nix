@@ -67,7 +67,6 @@
     tmux
     tree
     unstable.claude-code
-    unstable.codex
     unstable.gemini-cli
     uv
     vim
