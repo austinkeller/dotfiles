@@ -66,7 +66,6 @@
     tfswitch
     tmux
     tree
-    unstable.claude-code
     unstable.gemini-cli
     uv
     vim
