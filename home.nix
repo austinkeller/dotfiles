@@ -66,7 +66,6 @@
     tfswitch
     tmux
     tree
-    unstable.gemini-cli
     uv
     vim
     wakeonlan
