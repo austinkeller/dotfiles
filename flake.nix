@@ -5,7 +5,7 @@
     # Default: stable darwin channel (better binary cache coverage)
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
 
-    # Unstable: for packages that need bleeding edge (e.g., claude-code)
+    # Unstable: for packages that need bleeding edge (e.g., yt-dlp)
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
