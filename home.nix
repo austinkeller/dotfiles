@@ -66,11 +66,11 @@
     tfswitch
     tmux
     tree
+    unstable.yt-dlp
     uv
     vim
     wakeonlan
     wget
-    yt-dlp
     # keep-sorted end
   ]
   # macOS-specific packages
